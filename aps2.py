@@ -1,5 +1,5 @@
 #Aluno: Jonathan Guimarães Ferreira Fernandes
-#Matrícula: 2017201778
+#Matrícula: ************
 #Questão2: Recebendo a matriz criptografada e logo em seguida multiplicando com o inverso da matriz de criptografia. Após a multiplicação, exibindo a mensagem descriptografada.
 
 import numpy as np
@@ -68,8 +68,12 @@ mensagem_descriptografada = ''
 #Acessando linha por linha e utilizando o dicionário para dar valor a string de mensagem descriptografada.
 for linha in C:
   print(linha)
-  for i in range(3):
-    mensagem_descriptografada += tabela_numerica[i] 
+
+#String recebendo a mensagem descriptografada
+for j in range(2):
+    for i in range(3):
+      mensagem_descriptografada += tabela_numerica[C[i][j]]
+
 
 print('\n============================================')
 print('===========Mensagem descriptografada========')
