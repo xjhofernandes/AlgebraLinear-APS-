@@ -11,6 +11,8 @@ public class APP {
 	
 	System.out.println(p.getDays());
 	System.out.println(p.getYears());
-	System.out.println(p.toTotalMonths()); //Retornando a quantidade de meses com a precisão correta. 
+	System.out.println(p.toTotalMonths()); //Retornando a quantidade de meses com a precisão correta.
+		
+	//Conferir dados: https://www.calendario-365.com.br/calcular/19-08-2018_19-01-2020.html 
 	}	
 }
