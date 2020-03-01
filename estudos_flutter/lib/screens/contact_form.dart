@@ -1,17 +1,18 @@
 import 'package:estudos_flutter/components/editor.dart';
-import 'package:estudos_flutter/models/contacts.dart';
+import 'package:estudos_flutter/database/DAO/contact_dao.dart';
+import 'package:estudos_flutter/database/app_database.dart';
+import 'package:estudos_flutter/models/contact.dart';
 import 'package:flutter/material.dart';
 
 class ContactForm extends StatefulWidget {
-
   @override
   _ContactFormState createState() => _ContactFormState();
 }
 
 class _ContactFormState extends State<ContactForm> {
   final TextEditingController _controllerCampoNome = TextEditingController();
-
   final TextEditingController _controllerCampoConta = TextEditingController();
+  final ContactDAO _dao = ContactDAO();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,14 @@ class _ContactFormState extends State<ContactForm> {
                 width: double.maxFinite,
                 child: RaisedButton(
                   child: Text('Create'),
-                  onPressed: () => createContact(context),
+                  onPressed: () {
+                    final String nome = _controllerCampoNome.text;
+                    final int conta = int.tryParse(_controllerCampoConta.text);
+                    if (nome != null && conta != null) {
+                      _dao.save(Contact(name: nome, accountNumber: conta))
+                          .then((id) => Navigator.pop(context));
+                    }
+                  },
                   color: Theme.of(context).primaryColor,
                 ),
               ),
@@ -48,14 +56,5 @@ class _ContactFormState extends State<ContactForm> {
         ),
       ),
     );
-  }
-
-  void createContact(BuildContext context) {
-    final String nome = _controllerCampoNome.text;
-    final int conta = int.parse(_controllerCampoConta.text);
-    if (nome != null && conta != null){
-      final contactCreate = Contacts(nome, conta);
-      Navigator.pop(context, contactCreate);
-    }
   }
 }
